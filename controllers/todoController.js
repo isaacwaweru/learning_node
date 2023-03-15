@@ -11,3 +11,9 @@ exports.createTodo = async (req, res, next) => {
     res.status(400).json(error);
   }
 };
+
+// exports.createTodo = factory.createOne(Todo);
+// exports.getTodo = factory.getOne(Todo);
+// exports.getAllTodos = factory.getAll(Todo);
+// exports.updateTodo = factory.updateOne(Todo);
+// exports.deleteTodo = factory.deleteOne(Todo);
