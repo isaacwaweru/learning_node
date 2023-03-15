@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 //Routes
 app.use('/', viewController);
 app.use('/api/v1/todos', todoRouter);
+// app.use('/api/v1/tutorials', tutorialRouter);
 
 
 app.all('*', (req, res, next) => {
