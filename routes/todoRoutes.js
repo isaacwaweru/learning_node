@@ -7,6 +7,15 @@ router
   .route('/')
   .post(todoController.createTodo);
 
+router
+  .route('/')
+   .get(todoController.getAllTodos)
+  .post(todoController.createTodo);
+
+ router
+   .route('/:id')
+   .get(todoController.getTodo)
+
 module.exports = router;
 
 // const express = require('express');
@@ -14,14 +23,6 @@ module.exports = router;
 
 // const router = express.Router();
 
-// router
-//   .route('/')
-//   .get(todoController.getAllTodos)
-//   .post(todoController.createTodo);
-
-// router
-//   .route('/:id')
-//   .get(todoController.getTodo)
 //   .patch(todoController.updateTodo)
 //   .delete(todoController.deleteTodo);
 
