@@ -5,26 +5,14 @@ const router = express.Router();
 
 router
   .route('/')
+  .get(todoController.getAllTodos)
   .post(todoController.createTodo);
 
 router
-  .route('/')
-   .get(todoController.getAllTodos)
-   .post(todoController.createTodo);
-
- router
-   .route('/:id')
-   .get(todoController.getTodo)
-
-  
-router
   .route('/:id')
-  .patch(todoController.updateTodo);
-
-router
-  .route('/:id')
+  .get(todoController.getTodo)
+  .patch(todoController.updateTodo)
   .delete(todoController.deleteTodo);
-
   
 module.exports = router;
 
