@@ -28,12 +28,3 @@ router
   
 module.exports = router;
 
-// const express = require('express');
-// const todoController = require('../controllers/todoController');
-
-// const router = express.Router();
-
-//   .patch(todoController.updateTodo)
-//   .delete(todoController.deleteTodo);
-
-// module.exports = router;

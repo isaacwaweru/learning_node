@@ -34,7 +34,7 @@ exports.getTodo = async ( req, res ) => {
 
 exports.getAllTodos = async (req, res) => {
   const  name = req.query.name;
-  var condition = name ? { title: { $regex: new RegExp(name), $options: "i" } } : {};
+  var condition = name ? { name: { $regex: new RegExp(name), $options: "i" } } : {};
 
   await Todo.find(condition)
     .then(data => {
