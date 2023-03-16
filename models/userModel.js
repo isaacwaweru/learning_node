@@ -11,10 +11,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A user must have a email'],
   },
-  password: {
+  phone: {
     type: String,
     required: [true, 'A user must have a password'],
-  },
+  }
 });
 
 userSchema.pre('save', function (next) {
