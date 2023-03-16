@@ -21,13 +21,13 @@ exports.getTodo = async ( req, res ) => {
     await Todo.findById(id)
     .then(data => {
       if ( !data )
-        res.status(404).send({ message: "Not found tutorial with id" + id });
+        res.status(404).send({ message: "Not found todo with id" + id });
         else res.send(data);
     } )
     .catch(err => {
       res
        .status(500)
-       .send({ message: "Error retrieving Tutorial with id=" +id });
+       .send({ message: "Error retrieving Todo with id=" +id });
     });
   }
 // exports.getAllTodos = factory.getAll(Todo);
