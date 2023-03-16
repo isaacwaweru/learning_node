@@ -1,95 +1,58 @@
 const Todo = require('../models/todoModel');
 
+// Create a todo
 exports.createTodo = async (req, res, next) => {
   try {
-    const newTodo = await Todo.create({
+    const data = await Todo.create({
     name: req.body.name,
     duration: req.body.duration,
   });
-    res.status(200).json(newTodo);
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).json(error);
   }
 };
 
-// exports.createTodo = factory.createOne(Todo);
-// exports.getTodo = factory.getOne(Todo);
-
+// Get a todo
 exports.getTodo = async ( req, res ) => {
-    const id = req.params.id;
-
-    await Todo.findById(id)
-    .then(data => {
-      if ( !data )
-        res.status(404).send({ message: "Not found todo with id" + id });
-        else res.send(data);
-    } )
-    .catch(err => {
-      res
-       .status(500)
-       .send({ message: "Error retrieving Todo with id=" +id });
-    });
+    try {
+      const todo = await Todo.findById(req.params.id);
+      res.status(200).json(todo);
+    } catch (error) {
+      res.status(400).json(error);
+    }
   }
-// exports.getAllTodos = factory.getAll(Todo);
 
+// Get all todos
 exports.getAllTodos = async (req, res) => {
-  const  name = req.query.name;
-  var condition = name ? { name: { $regex: new RegExp(name), $options: "i" } } : {};
-
-  await Todo.find(condition)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving todos."
-      });
-    });
-};
-
-// exports.updateTodo = factory.updateOne(Todo);
-exports.updateTodo = async (req, res) => {
-  if (!req.body) {
-      return res.status(400).send({
-          message: "Data to update can not be empty!"
-      });
+  try {
+    const todos = await Todo.find();
+    res.status(200).json(todos);
+  } catch (error) {
+    res.status(400).json(error);
   }
-  const id = req.params.id;
+}
 
-  await Todo.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-      .then(data => {
-          if (!data) {
-              res.status(404).send({
-                  message: `Cannot update Todo with id=${id} Maybe Tutorial was not found!`
-              });
-          } else res.send({ message: "Todo was updated successfully" });
-      })
-      .catch(err => {
-          res.status(500).send({
-              message: "Error updating Todo with id=" +id
-          });
-      });
+// update a todo
+exports.updateTodo = async (req, res) => {
+  try {
+    const todos = await Todo.findByIdAndUpdate(req.params.id, req.body, {
+      useFindAndModify: false,
+    });
+    res.status(200).json(todos);
+  } catch (error) {
+    res.status(400).json(error);
+  }
 };
+
 // exports.deleteTodo = factory.deleteOne(Todo);
 exports.deleteTodo = async (req, res) => {
-  const id = req.params.id;
-
-await Todo.findByIdAndRemove(id)
-  .then(data => {
-    if (!data) {
-      res.status(404).send({
-        message: `Cannot delete Todo with id=${id}. Maybe Todo was not found!`
-      });
-    } else {
-      res.send({
-        message: "Todo was deleted successfully!"
-      });
-    }
-  })
-  .catch(err => {
-    res.status(500).send({
-      message: "Could not delete Todo with id=" + id
+  try {
+    const todos = await Todo.findByIdAndRemove(req.params.id);
+    res.status(200).json({
+      status: "successfully deleted"
     });
-  });
+  } catch (error) {
+    res.status(400).json(error);
+  }
 };
