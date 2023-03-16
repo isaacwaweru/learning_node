@@ -10,7 +10,7 @@ router
 router
   .route('/')
    .get(todoController.getAllTodos)
-  .post(todoController.createTodo);
+   .post(todoController.createTodo);
 
  router
    .route('/:id')
