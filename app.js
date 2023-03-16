@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const viewController = require('./routes/viewRoutes');
 const todoRouter = require('./routes/todoRoutes');
+const jokeRouter = require('./routes/jokeRoutes');
+
 
 // Start express app
 const app = express();
@@ -23,6 +25,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 //Routes
 app.use('/', viewController);
 app.use('/api/v1/todos', todoRouter);
+app.use('/api/v1/jokes', jokeRouter);
 // app.use('/api/v1/tutorials', tutorialRouter);
 
 

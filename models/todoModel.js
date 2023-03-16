@@ -19,5 +19,4 @@ todoSchema.pre('save', function (next) {
 });
 
 const Todo = mongoose.model('Todo', todoSchema);
-
 module.exports = Todo;
