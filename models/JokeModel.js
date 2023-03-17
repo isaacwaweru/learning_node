@@ -6,16 +6,16 @@ const jokeSchema = new mongoose.Schema({
       type: String,
       required: [true , 'Every User must give a joke' ],
     },
+    slug : String,
     category: {
       type: String,
       required: [true , 'Every Joke must have a category'],
     },
-    // user: {
-    //   usrName : String,
-    //  // type: mongoose.Schema.Types.ObjectId,
-    //  // ref: 'User',
-    //   required: [true , 'Every Joke mmust be from a user '],
-    // },
+    String : String , 
+    user: {
+      type : String,
+      required : [true , 'Every Joke mmust be from a user '],
+    },
   });
   
   jokeSchema.pre('save', function (next) {

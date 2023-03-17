@@ -11,6 +11,10 @@ const todoSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'A todo must have a duration'],
   },
+  // identifier : {
+  //   type :Number,
+  //   required :[  ]
+  // }
 });
 
 todoSchema.pre('save', function (next) {

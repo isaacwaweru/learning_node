@@ -13,7 +13,18 @@ exports.createTodo = async (req, res, next) => {
   }
 };
 
-// exports.getAllTodos = factory.getAll(Todo);
+// Get a todo
+exports.getTodo = async ( req, res ) => {
+  try {
+    const todo = await Todo.findById(req.params.id);
+    res.status(200).json(todo);
+  } catch (error) {
+    res.status(400).json(error);
+  // } finally (what to do ){
+
+  // }
+}
+};
 
 exports.getAllTodos = async (req, res) => {
 const  name = req.query.name;
