@@ -1,18 +1,15 @@
-const Todo = require("../models/todoModel");
+const catchAsync = require('../utils/catchAsync');
+const Todo = require('../models/todoModel');
 
 // Create a todo
-exports.createTodo = async (req, res, next) => {
-  try {
-    const data = await Todo.create({
-      name: req.body.name,
-      duration: req.body.duration,
-    });
+exports.createTodo = catchAsync(async (req, res, next) => {
+  const data = await Todo.create({
+    name: req.body.name,
+    duration: req.body.duration,
+  });
 
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(400).json(error);
-  }
-};
+  res.status(200).json(data);
+});
 
 // Get a todo
 exports.getTodo = async (req, res) => {
@@ -49,9 +46,9 @@ exports.updateTodo = async (req, res) => {
 // Delete a todo
 exports.deleteTodo = async (req, res) => {
   try {
-    const todos = await Todo.findByIdAndRemove(req.params.id);
+    await Todo.findByIdAndRemove(req.params.id);
     res.status(200).json({
-      status: "success"
+      status: 'success',
     });
   } catch (error) {
     res.status(400).json(error);
