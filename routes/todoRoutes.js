@@ -9,20 +9,20 @@ router
   .post(todoController.createTodo);
 
 router
+    .route('/:id')
+    .get(todoController.getTodo)
+
+router 
     .route('/')
-    .get(todoController.getTodos)
+    .get(todoController.getAllTodos)
 
 router 
-      .route('/')
-      .get(todoController.getAllTodos)
+    .route('/:id')
+    .put(todoController.updateTodo)
 
 router 
-      .route('/:id')
-      .update(todoController.updateTodo)
-
-router 
-      .route('/:id')
-      .delete(todoController.deleteTodo)
+    .route('/:id')
+    .delete(todoController.deleteTodo)
 
 module.exports = router;
 
