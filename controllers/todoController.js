@@ -7,7 +7,6 @@ exports.createTodo = catchAsync(async (req, res, next) => {
     name: req.body.name,
     duration: req.body.duration,
   });
-
   res.status(200).json(data);
 });
 
