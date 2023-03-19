@@ -1,4 +1,3 @@
- 
 const express = require('express');
 const jokeController = require('../controllers/jokeController');
 
@@ -8,7 +7,6 @@ router
   .route('/')
   .get(jokeController.getAllJoke)
   .post(jokeController.createJoke);
-  
 
 router
   .route('/:id')
@@ -16,4 +14,4 @@ router
   .patch(jokeController.updateJoke)
   .delete(jokeController.deleteJoke);
 
-  module.exports = router;
+module.exports = router;
