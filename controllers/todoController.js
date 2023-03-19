@@ -25,38 +25,13 @@ exports.getAllTodos = catchAsync(async (req, res) => {
 });
 // exports.updateTodo = factory.updateOne(Todo);
 exports.updateTodo = catchAsync(async (req, res) => {
-  if (!req.body) {
-    return res.status(400).send({
-      message: 'Data to update can not be empty!',
-    });
-  }
-  const { id } = req.params;
-
-  await Todo.findByIdAndUpdate(id, req.body, { useFindAndModify: false }).then(
-    data => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot update Todo with id=${id} Maybe Tutorial was not found!`,
-        });
-      } else res.send({ message: 'Todo was updated successfully' });
-    }
-  );
+  const todos = await Todo.findByIdAndUpdate(req.params.id, req.body, {
+    useFindAndModify: false,
+  });
+  res.status(200).json(todos);
 });
 // exports.deleteTodo
-exports.deleteTodo = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  await Todo.findByIdAndRemove(id).then(data => {
-    if (!data) {
-      res.status(404).send({
-        message: `Cannot delete Todo with id=${id}. Maybe Todo was not found!`,
-      });
-    } else {
-      res.send({
-        message: 'Todo was deleted successfully!',
-      });
-    }
-  });
-});
+
 exports.deleteTodo = catchAsync(async (req, res) => {
   await Todo.findByIdAndRemove(req.params.id);
   res.status(200).json({
