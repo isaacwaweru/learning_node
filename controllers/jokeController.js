@@ -3,7 +3,7 @@ const catchAsync = require('../utils/catchAsync');
 
 exports.createJoke = catchAsync(async (req, res, next) => {
   const data = await Joke.create({
-    text: req.body.joke,
+    joke: req.body.joke,
     category: req.body.category,
     // user: req.body.user,
   });

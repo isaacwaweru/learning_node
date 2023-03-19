@@ -57,3 +57,9 @@ exports.deleteTodo = catchAsync(async (req, res) => {
     }
   });
 });
+exports.deleteTodo = catchAsync(async (req, res) => {
+  await Todo.findByIdAndRemove(req.params.id);
+  res.status(200).json({
+    status: 'success',
+  });
+});
