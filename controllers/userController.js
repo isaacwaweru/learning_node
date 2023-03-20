@@ -1,58 +1,38 @@
+const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 
-exports.createUser = async (req, res, next) => {
-    try {
-      const newUser = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-    });
-      res.status(200).json(newUser);
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  };
+exports.createUser = catchAsync(async (req, res, next) => {
+  const newUser = await User.create({
+    name: req.body.name,
+    email: req.body.email,
+    phone: req.body.phone,
+  });
+  res.status(200).json(newUser);
+});
 
 // get a single user
-  exports.getUser = async ( req, res ) => {
-    try {
-      const user = await User.findById(req.params.id);
-      res.status(200).json(todo);
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  }
+exports.getUser = catchAsync(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  res.status(200).json(user);
+});
 
 // get all users
-  exports.getAllUsers = async (req, res) => {
-    try {
-      const users = await User.find();
-      res.status(200).json(users);
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  }
+exports.getAllUsers = catchAsync(async (req, res) => {
+  const users = await User.find();
+  res.status(200).json(users);
+});
 // Update users
-exports.updateUser = async (req, res) => {
-    try {
-      const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-        useFindAndModify: false,
-      });
-      res.status(200).json(users);
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  };
+exports.updateUser = catchAsync(async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    useFindAndModify: false,
+  });
+  res.status(200).json(user);
+});
 
 // Delete user
-exports.deleteUser = async (req, res) => {
-    try {
-      const user = await User.findByIdAndRemove(req.params.id);
-      res.status(200).json({
-        status: "successfully deleted"
-      });
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  };
- 
+exports.deleteUser = catchAsync(async (req, res) => {
+  await User.findByIdAndRemove(req.params.id);
+  res.status(200).json({
+    status: 'successfully deleted',
+  });
+});
