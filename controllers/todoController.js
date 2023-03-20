@@ -1,58 +1,39 @@
+const catchAsync = require('../utils/catchAsync');
 const Todo = require('../models/todoModel');
 
 // Create a todo
-exports.createTodo = async (req, res, next) => {
-  try {
-    const data = await Todo.create({
+exports.createTodo = catchAsync(async (req, res, next) => {
+  const data = await Todo.create({
     name: req.body.name,
     duration: req.body.duration,
   });
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(400).json(error);
-  }
-};
+  res.status(200).json(data);
+});
 
 // Get a todo
-exports.getTodo = async ( req, res ) => {
-    try {
-      const todo = await Todo.findById(req.params.id);
-      res.status(200).json(todo);
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  }
+exports.getTodo = catchAsync(async (req, res) => {
+  const todo = await Todo.findById(req.params.id);
+  res.status(200).json(todo);
+});
 
 // Get all todos
-exports.getAllTodos = async (req, res) => {
-  try {
-    const todos = await Todo.find();
-    res.status(200).json(todos);
-  } catch (error) {
-    res.status(400).json(error);
-  }
-}
+exports.getAllTodos = catchAsync(async (req, res) => {
+  const todos = await Todo.find();
+  res.status(200).json(todos);
+});
 
 // update a todo
-exports.updateTodo = async (req, res) => {
-  try {
-    const todos = await Todo.findByIdAndUpdate(req.params.id, req.body, {
-      useFindAndModify: false,
-    });
-    res.status(200).json(todos);
-  } catch (error) {
-    res.status(400).json(error);
-  }
-};
+exports.updateTodo = catchAsync(async (req, res) => {
+  const todos = await Todo.findByIdAndUpdate(req.params.id, req.body, {
+    useFindAndModify: false,
+  });
+  res.status(200).json(todos);
+});
 
 // exports.deleteTodo = factory.deleteOne(Todo);
-exports.deleteTodo = async (req, res) => {
-  try {
-    const todos = await Todo.findByIdAndRemove(req.params.id);
-    res.status(200).json({
-      status: "successfully deleted"
-    });
-  } catch (error) {
-    res.status(400).json(error);
-  }
-};
+exports.deleteTodo = catchAsync(async (req, res) => {
+  await Todo.findByIdAndRemove(req.params.id);
+  res.status(200).json({
+    status: 'successfully deleted',
+  });
+});
