@@ -22,7 +22,7 @@ exports.updateOne = Model =>
       runValidators: true,
     });
 
-    if (todo) {
+    if (!todo) {
       return next(new AppError('No todo found with that ID', 404));
     }
 
