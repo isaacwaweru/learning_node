@@ -1,6 +1,15 @@
-const catchAsync = require('../utils/catchAsync');
+//const catchAsync = require('../utils/catchAsync');
 const Todo = require('../models/todoModel');
+const factory = require('./handlerFactory');
 
+// Create a todo
+exports.createTodo = factory.createOne(Todo);
+exports.getTodo = factory.getOne(Todo);
+exports.getAllTodos = factory.getAll(Todo);
+exports.updateTodo = factory.updateOne(Todo);
+exports.deleteTodo = factory.deleteOne(Todo);
+
+/*
 // Create a todo
 exports.createTodo = catchAsync(async (req, res, next) => {
   const data = await Todo.create({
@@ -37,3 +46,4 @@ exports.deleteTodo = catchAsync(async (req, res) => {
     status: 'successfully deleted',
   });
 });
+*/
