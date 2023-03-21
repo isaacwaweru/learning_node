@@ -25,7 +25,6 @@ exports.updateOne = Model =>
     if (!doc) {
       return next(new AppError('No document found with that ID', 404));
     }
-
     res.status(200).json({
       status: 'success',
       data: {
@@ -66,8 +65,6 @@ exports.getOne = (Model, popOptions) =>
 
 exports.getAll = Model =>
   catchAsync(async (req, res, next) => {
-    // To allow for nested GET reviews on tour (hack)
-
     const totalItems = await Model.find();
 
     // SEND RESPONSE
