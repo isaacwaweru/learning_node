@@ -1,6 +1,14 @@
-const catchAsync = require('../utils/catchAsync');
+// const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
+const factory = require('./handlerFactory');
 
+exports.createUser = factory.createOne(User);
+exports.getUser = factory.getOne(User);
+exports.getAllUsers = factory.getAll(User);
+exports.updateUser = factory.updateOne(User);
+exports.deleteUser = factory.deleteOne(User);
+
+/*
 exports.createUser = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     name: req.body.name,
@@ -36,3 +44,4 @@ exports.deleteUser = catchAsync(async (req, res) => {
     status: 'successfully deleted',
   });
 });
+*/
