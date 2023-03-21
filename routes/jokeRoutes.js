@@ -5,7 +5,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(jokeController.getAllJoke)
+  .get(jokeController.getAllJokes)
   .post(jokeController.createJoke);
 
 router
