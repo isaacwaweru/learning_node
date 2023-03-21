@@ -3,16 +3,15 @@ const catchAsync = require('../utils/catchAsync');
 
 exports.createJoke = catchAsync(async (req, res, next) => {
   const data = await Joke.create({
-    joke: req.body.joke,
-    category: req.body.category,
-    // user: req.body.user,
+    name: req.body.name,
+    duration: req.body.duration,
   });
   res.status(200).json(data);
 });
 
 exports.getJoke = catchAsync(async (req, res) => {
-  const joke = await Joke.findById(req.params.id);
-  res.status(200).json(joke);
+  const todo = await Joke.findById(req.params.id);
+  res.status(200).json(todo);
 });
 
 exports.getAllJoke = catchAsync(async (req, res) => {
@@ -26,35 +25,17 @@ exports.getAllJoke = catchAsync(async (req, res) => {
 });
 // exports.updateTodo = factory.updateOne(Todo);
 exports.updateJoke = catchAsync(async (req, res) => {
-  if (!req.body) {
-    return res.status(400).send({
-      message: 'Data to update can not be empty!',
-    });
-  }
-  const { id } = req.params;
-
-  await Joke.findByIdAndUpdate(id, req.body, { useFindAndModify: false }).then(
-    data => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot update Joke with id=${id} Maybe Joke was not found!`,
-        });
-      } else res.send({ message: 'Joke was updated successfully' });
-    }
-  );
+  const todos = await Joke.findByIdAndUpdate(req.params.id, req.body, {
+    useFindAndModify: false,
+  });
+  res.status(200).json(todos);
 });
 // exports.deleteTodo
+
 exports.deleteJoke = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  await Joke.findByIdAndRemove(id).then(data => {
-    if (!data) {
-      res.status(404).send({
-        message: `Cannot delete Joke with id=${id}. Maybe Joke was not found!`,
-      });
-    } else {
-      res.send({
-        message: 'Joke was deleted successfully!',
-      });
-    }
+  await Joke.findByIdAndRemove(req.params.id);
+  res.status(200).json({
+    status: 'success',
   });
 });
+
