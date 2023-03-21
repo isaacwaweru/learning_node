@@ -3,11 +3,11 @@ const factory = require('./handlerFactory');
 //const catchAsync = require('../utils/catchAsync');
 //create to do
 
-exports.createJoke = factory.createOne(Todo);
-exports.getJoke = factory.getOne(Todo);
-exports.getAllJokes = factory.getAll(Todo);
-exports.updateJoke = factory.updateOne(Todo);
-exports.deleteJoke = factory.deleteOne(Todo);
+exports.createTodo = factory.createOne(Todo);
+exports.getTodo = factory.getOne(Todo);
+exports.getAllTodos = factory.getAll(Todo);
+exports.updateTodo = factory.updateOne(Todo);
+exports.deleteTodo = factory.deleteOne(Todo);
 
 // exports.createTodo = catchAsync(async (req, res, next) => {
 //   const data = await Todo.create({
