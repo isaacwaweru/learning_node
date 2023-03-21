@@ -45,4 +45,3 @@ exports.deleteJoke = factory.deleteOne(Joke);
 //     status: 'success',
 //   });
 // });
-
