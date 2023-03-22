@@ -6,14 +6,16 @@ const AppError = require('./utils/appError');
 const viewController = require('./routes/viewRoutes');
 const userRouter = require('./routes/userRoutes');
 const todoRouter = require('./routes/todoRoutes');
+
 // Start express app
 const app = express();
 
 app.use(cors());
 
 // Development logging
-
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
