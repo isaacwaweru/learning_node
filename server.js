@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const dotenv = require('dotenv').config();
 
-dotenv.config({ path: './config.env' });
+// dotenv.config({ path: './config.env' });
 const app = require('./app');
 
 // console.log(mongoose);
 
 // Connection to a mongodb
-const DB = 'mongodb+srv://isaac:major@cluster0.8eppx.mongodb.net/nodejs?retryWrites=true&w=majority';
-
+//const link = process.env.DB_LINK;
+const DB = process.env.DB_LINK;
 mongoose.set('strictQuery', false);
 mongoose.connect(DB).then(() => console.log('DB connection successful!'));
 
