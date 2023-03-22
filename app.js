@@ -5,7 +5,7 @@ const cors = require('cors');
 const viewController = require('./routes/viewRoutes');
 const todoRouter = require('./routes/todoRoutes');
 const tutorialRouter = require('./routes/tutorialRoutes');
-
+const userRouter = require('./routes/userRoutes');
 // Start express app
 const app = express();
 const AppError = require('./utils/appError');
@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use('/', viewController);
 app.use('/api/v1/todos', todoRouter);
 app.use('/api/v1/tutorials', tutorialRouter);
+app.use('/api/v1/users', userRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
