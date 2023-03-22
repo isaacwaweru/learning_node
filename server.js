@@ -7,9 +7,7 @@ const app = require('./app');
 // console.log(mongoose);
 
 // Connection to a mongodb
-const DB =
-  'mongodb+srv://isaac:major@cluster0.8eppx.mongodb.net/nodejs?retryWrites=true&w=majority';
-
+const DB = process.env.MONGODB_URI;
 mongoose.set('strictQuery', false);
 mongoose.connect(DB).then(() => console.log('DB connection successful!'));
 
