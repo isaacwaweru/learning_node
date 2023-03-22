@@ -7,7 +7,7 @@ const app = require('./app');
 // console.log(mongoose);
 
 // Connection to a mongodb
-const DB = process.env.MONGODB_URI;
+const DB = process.env.DATABASE;
 mongoose.set('strictQuery', false);
 mongoose.connect(DB).then(() => console.log('DB connection successful!'));
 
