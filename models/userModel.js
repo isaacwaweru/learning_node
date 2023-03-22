@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
     minLength: 8,
     select: false,
   },
-  passwordConfirmation: {
+  passwordConfirm: {
     type: String,
     required: [true, 'Please confirm your password'],
     validate: {
@@ -70,7 +70,7 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-// Comapre password
+// Compare password
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
