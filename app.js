@@ -6,6 +6,7 @@ const AppError = require('./utils/appError');
 const viewController = require('./routes/viewRoutes');
 const userRouter = require('./routes/userRoutes');
 const todoRouter = require('./routes/todoRoutes');
+const articleRouter = require('./routes/articleRoutes');
 
 // Start express app
 const app = express();
@@ -30,6 +31,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use('/', viewController);
 app.use('/api/v1/todos', todoRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/articles', articleRouter);
 // app.use('/api/v1/tutorials', tutorialRouter);
 
 app.all('*', (req, res, next) => {
