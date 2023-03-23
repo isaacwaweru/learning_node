@@ -1,4 +1,5 @@
 const express = require('express');
+const authController = require('../controllers/authController');
 const todoController = require('../controllers/todoController');
 
 const router = express.Router();
@@ -6,7 +7,7 @@ const router = express.Router();
 // router
 //   .route('/')
 //   .post(todoController.createTodo);
-
+router.use(authController.protect);
 router
   .route('/')
   .get(todoController.getAllTodos)
