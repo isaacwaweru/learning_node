@@ -4,11 +4,15 @@ const jokeController = require('../controllers/jokeController');
 
 const router = express.Router();
 
-router.use(authController.protect);
-router
-  .route('/')
-  .get(jokeController.getAllJokes)
-  .post(jokeController.createJoke);
+//creating a joke no need to be looged in 
+
+router.route('/').post(jokeController.createJoke);
+
+// getting the jokes must be looged in 
+
+//router.use(authController.protect);
+router.use(authController.restrictTo('admin', 'super-admin'));
+router.route('/').get(jokeController.getAllJokes);
 
 router
   .route('/:id')

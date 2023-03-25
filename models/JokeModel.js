@@ -8,13 +8,14 @@ const jokeSchema = new mongoose.Schema({
   },
   slug: String,
   category: {
-    type: Number,
+    type: String,
     required: [true, 'how funny are you '],
   },
-  // identifier : {
-  //   type :Number,
-  //   required :[  ]
-  // }
+  role: {
+    type: String,
+    enum: ['user', 'admin', 'super-admin', 'master'],
+    default: 'user',
+  },
 });
 
 jokeSchema.pre('save', function (next) {
