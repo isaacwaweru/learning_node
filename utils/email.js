@@ -15,7 +15,7 @@ module.exports = class Email {
       service: 'gmail',
       auth: {
         user: 'mathenge.joseph18@students.dkut.ac.ke',
-        pass: 'wakaHATOLI001#',
+        pass: '___________',
       },
     });
   }
