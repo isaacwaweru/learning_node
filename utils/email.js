@@ -7,15 +7,16 @@ module.exports = class Email {
     this.to = user.email;
     this.firstName = user.name.split(' ')[0];
     this.url = url;
-    this.from = 'Learning Nodejs';
+    this.from = 'Sarah <sarahmukutic@gmail.com>';
   }
 
   newTransport() {
     return nodemailer.createTransport({
-      service: 'gmail',
+      host: 'sandbox.smtp.mailtrap.io',
+      port: 2525,
       auth: {
-        user: 'sarahmukutic@gmail.com',
-        pass: '___________',
+        user: 'fa1e09b64dc000',
+        pass: '55ba57551503a1',
       },
     });
   }
