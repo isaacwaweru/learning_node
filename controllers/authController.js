@@ -93,18 +93,18 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.restrictTo =
-  (...roles) =>
-  (req, res, next) => {
-    // roles ['admin', 'super-admin']. role='user'
-    if (!roles.includes(req.user.role)) {
-      return next(
-        new AppError('You do not have permission to perform this action', 403)
-      );
-    }
+// exports.restrictTo =
+//   (...roles) =>
+//   (req, res, next) => {
+//     // roles ['admin', 'super-admin']. role='user'
+//     if (!roles.includes(req.user.role)) {
+//       return next(
+//         new AppError('You do not have permission to perform this action', 403)
+//       );
+//     }
 
-    next();
-  };
+//     next();
+//   };
 
 // Forgot password
 exports.forgotPassword = catchAsync(async (req, res, next) => {
