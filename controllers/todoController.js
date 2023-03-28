@@ -19,6 +19,7 @@ exports.deleteTodo = factory.deleteOne(Todo);
 
 // // Get a todo
 // exports.getTodo = async (req, res) => {
+//   console.log('user', req.user);
 //   try {
 //     const todo = await Todo.findById(req.params.id);
 //     res.status(200).json(todo);

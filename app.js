@@ -6,6 +6,7 @@ const AppError = require('./utils/appError');
 const viewController = require('./routes/viewRoutes');
 const userRouter = require('./routes/userRoutes');
 const todoRouter = require('./routes/todoRoutes');
+const couchRouter = require('./routes/couchRoutes');
 
 // Start express app
 const app = express();
@@ -13,8 +14,9 @@ const app = express();
 app.use(cors());
 
 // Development logging
-
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
@@ -24,6 +26,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use('/', viewController);
 app.use('/api/v1/todos', todoRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/couches', couchRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
