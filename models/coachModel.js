@@ -5,7 +5,7 @@ const couchSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A couch must have a name'],
   },
-  expertise: {},
+  expertise: Object,
   languages: [],
 });
 
