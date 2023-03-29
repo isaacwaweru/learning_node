@@ -6,6 +6,7 @@ const viewController = require('./routes/viewRoutes');
 const todoRouter = require('./routes/todoRoutes');
 const jokeRouter = require('./routes/jokeRoutes');
 const userRouter = require('./routes/userRoutes');
+const coachRouter = require('./routes/coachRoutes');
 
 // Start express app
 const app = express();
@@ -26,6 +27,7 @@ app.use('/', viewController);
 app.use('/api/v1/todos', todoRouter);
 app.use('/api/v1/jokes', jokeRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/coaches', coachRouter);
 // app.use('/api/v1/tutorials', tutorialRouter);
 
 app.all('*', (req, res, next) => {

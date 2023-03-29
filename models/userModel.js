@@ -62,6 +62,7 @@ const userSchema = new mongoose.Schema({
     default: true,
     select: false,
   },
+  userJokes: [],
 });
 
 userSchema.pre('save', async function (next) {
