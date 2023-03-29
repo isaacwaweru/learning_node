@@ -1,11 +1,11 @@
 const express = require('express');
-const couchController = require('../controllers/couchController');
+const coachController = require('../controllers/coachController');
 
 const router = express.Router();
 
 router
   .route('/')
-  .post(couchController.createCouch)
-  .get(couchController.getAllCouches);
+  .post(coachController.createCoach)
+  .get(coachController.getAllCoaches);
 
 module.exports = router;

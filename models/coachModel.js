@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const couchSchema = new mongoose.Schema({
+const coachSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'A couch must have a name'],
@@ -9,6 +9,6 @@ const couchSchema = new mongoose.Schema({
   languages: [],
 });
 
-const Couch = mongoose.model('Couch', couchSchema);
+const Coach = mongoose.model('Coach', coachSchema);
 
-module.exports = Couch;
+module.exports = Coach;
