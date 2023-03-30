@@ -1,4 +1,5 @@
 const catchAsync = require('../utils/catchAsync');
+const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
 
 exports.deleteOne = Model =>
@@ -53,7 +54,7 @@ exports.getOne = (Model, popOptions) =>
     const doc = await query;
 
     if (!doc) {
-      return next(new AppError('No joke found with that ID', 404));
+      return next(new AppError('No document found with that ID', 404));
     }
 
     res.status(200).json({
@@ -67,15 +68,26 @@ exports.getOne = (Model, popOptions) =>
 exports.getAll = Model =>
   catchAsync(async (req, res, next) => {
     // To allow for nested GET reviews on tour (hack)
+    let filter = {};
+    if (req.params.tourId) filter = { tour: req.params.tourId };
 
-    const totalItems = await Model.find();
+    const features = new APIFeatures(Model.find(filter), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+    // const doc = await features.query.explain();
+    const doc = await features.query;
+
+    const totalItems = await Model.find(filter);
 
     // SEND RESPONSE
     res.status(200).json({
       status: 'success',
       totalRecords: totalItems.length,
+      results: doc.length,
       data: {
-        data: totalItems,
+        data: doc,
       },
     });
   });

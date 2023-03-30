@@ -1,5 +1,5 @@
 const express = require('express');
-const authController = require('../controllers/authController');
+//const authController = require('../controllers/authController');
 const jokeController = require('../controllers/jokeController');
 
 const router = express.Router();
@@ -10,7 +10,7 @@ router.route('/').post(jokeController.createJoke);
 
 // getting the jokes must be looged in 
 
-router.use(authController.protect);
+//router.use(authController.protect);
 // router.use(authController.restrictTo('admin', 'super-admin'));
 router.route('/').get(jokeController.getAllJokes);
 
