@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const coachSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'A couch must have a name'],
+    required: [true, 'A coach must have a name'],
   },
   expertise: Object,
   languages: [],
