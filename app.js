@@ -6,6 +6,8 @@ const viewController = require('./routes/viewRoutes');
 const todoRouter = require('./routes/todoRoutes');
 const tutorialRouter = require('./routes/tutorialRoutes');
 const userRouter = require('./routes/userRoutes');
+const coachRouter = require('./routes/coachRoutes');
+
 // Start express app
 const app = express();
 const AppError = require('./utils/appError');
@@ -26,6 +28,7 @@ app.use('/', viewController);
 app.use('/api/v1/todos', todoRouter);
 app.use('/api/v1/tutorials', tutorialRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/coaches', coachRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
