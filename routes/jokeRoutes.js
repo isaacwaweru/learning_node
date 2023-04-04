@@ -4,15 +4,19 @@ const jokeController = require('../controllers/jokeController');
 
 const router = express.Router();
 
-//creating a joke no need to be looged in 
+//creating a joke no need to be looged in
+router.get('/', (req, res) => {
+  res.render('jokes');
+});
+///home/joe_maina/Projects/jokes/learning_node/views/static/jokes
 
-router.route('/').post(jokeController.createJoke);
+router.route('/add').post(jokeController.createJoke);
 
-// getting the jokes must be looged in 
+// getting the jokes must be looged in
 
 //router.use(authController.protect);
 // router.use(authController.restrictTo('admin', 'super-admin'));
-router.route('/').get(jokeController.getAllJokes);
+router.route('/get').get(jokeController.getAllJokes);
 
 router
   .route('/:id')

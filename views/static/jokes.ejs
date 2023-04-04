@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List</title>
+</head>
+<body>
+	<h1>Todo List</h1>
+
+	<form method="POST" action="/api/v1/jokes/add">
+		<!-- <input type="text" name="item" placeholder="Enter a Joke"> -->
+
+		<label for="joke">joke:</label>
+		<input type="text" placeholder="Enter a Joke"><br><br>
+		
+		<label for="category">category:</label>
+		<input type="text" placeholder="Joke Category"><br><br>
+
+		<label for="role">role:</label>
+		<input type="text" placeholder="Enter your Role"><br><br>
+
+		<button type="submit">Add</button>
+	</form>
+</body>
+</html>

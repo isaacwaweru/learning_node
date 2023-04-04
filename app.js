@@ -2,6 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const path = require('path');
 const viewController = require('./routes/viewRoutes');
 const todoRouter = require('./routes/todoRoutes');
 const jokeRouter = require('./routes/jokeRoutes');
@@ -11,6 +12,8 @@ const coachRouter = require('./routes/coachRoutes');
 // Start express app
 const app = express();
 
+app.set('views', path.join(__dirname, 'views/static'));
+app.set('view engine', 'ejs');
 app.use(cors());
 
 // Development logging
