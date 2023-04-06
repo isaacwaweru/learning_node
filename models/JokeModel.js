@@ -16,6 +16,9 @@ const jokeSchema = new mongoose.Schema({
     enum: ['user', 'admin', 'super-admin', 'master'],
     default: 'user',
   },
+  meme: {
+    type: String,
+  },
 });
 
 jokeSchema.pre('save', function (next) {

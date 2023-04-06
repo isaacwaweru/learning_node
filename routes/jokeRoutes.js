@@ -1,4 +1,6 @@
 const express = require('express');
+const multer = require("multer");
+const upload = multer({ dest: 'uploads/' });
 //const authController = require('../controllers/authController');
 const jokeController = require('../controllers/jokeController');
 
@@ -10,12 +12,11 @@ router.get('/', (req, res) => {
 });
 ///home/joe_maina/Projects/jokes/learning_node/views/static/jokes
 
-router.route('/add').post(jokeController.createJoke);
+//router.route('/add').post(jokeController.createJoke);
+router.post('/add', upload.single('image'), jokeController.createJoke);
 
-// getting the jokes must be looged in
+//router.route('/add').post(jokeController.createJoke);
 
-//router.use(authController.protect);
-// router.use(authController.restrictTo('admin', 'super-admin'));
 router.route('/get').get(jokeController.getAllJokes);
 
 router
