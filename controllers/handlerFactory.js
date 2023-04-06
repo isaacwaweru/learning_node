@@ -1,14 +1,14 @@
-const fs = require('fs');
+//const fs = require('fs');
 //const util = require('util');
 //const unlinkFile = util.promisify(fs.unlink);
 //const path = require("path");
-const multer = require('multer');
+//const multer = require('multer');
 
-const upload = multer({ dest: 'uploads/' });
+//const upload = multer({ dest: 'uploads/' });
 const catchAsync = require('../utils/catchAsync');
 const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
-const { uploadFile, getFileStream } = require('../utils/s3');
+//const { uploadFile, getFileStream } = require('../utils/s3');
 
 exports.deleteOne = Model =>
   catchAsync(async (req, res, next) => {
@@ -26,6 +26,7 @@ exports.deleteOne = Model =>
 
 exports.updateOne = Model =>
   catchAsync(async (req, res, next) => {
+    console.log('may')
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
@@ -45,17 +46,7 @@ exports.updateOne = Model =>
 
 exports.createOne = Model =>
   catchAsync(async (req, res, next) => {
-    upload.single('image');
-    const meme = req.file;
-    console.log(req.body);
-    const result = await uploadFile(req.file);
-    await unlinkFile(meme.path);
-    //const result = await uploadFile(meme);
-    const doc = await Model.create({
-      ...req.body,
-      image: result.key // assuming the Model has an "image" field that stores the uploaded file's filename
-    });
-    //const doc = await Model.create(req.body);
+    const doc = await Model.create(req.body);
 
     res.status(201).json({
       status: 'success',
@@ -64,6 +55,7 @@ exports.createOne = Model =>
       },
     });
   });
+//const doc = await Model.create(req.body);
 
 exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
