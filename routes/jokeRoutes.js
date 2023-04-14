@@ -1,8 +1,10 @@
 const express = require('express');
 const multer = require('multer');
 const fs = require('fs');
-
 const util = require('util');
+const Joke = require('../models/JokeModel');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 const unlinkFile = util.promisify(fs.unlink);
 
@@ -24,28 +26,33 @@ router.get('/', (req, res) => {
 router.post(
   '/add/:id',
   upload.single('image'),
-  async (req, res) => {
+  catchAsync(async (req, res, next) => {
     const file = req.file;
-    //console.log(req.body);
-    //console.log(req.file);
+    console.log(file);
     const result = await uploadFile(file);
     await unlinkFile(file.path);
     console.log(result.Key);
-    //const description = req.body.description;
-    // if (!req.file) {
-    //   return res.status(400).send('No file uploaded');
-    // }
-    pic = { meme: result.Key };
     // eslint-disable-next-line no-undef
-    req.body = JSON.stringify(pic);
+    pic = { meme: result.Key };
+    const doc = await Joke.findByIdAndUpdate(
+      req.params.id,
+      { meme: result.Key },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    if (!doc) {
+      return next(new AppError('no joke found with that id', 404));
+    }
 
-    // Do something with the uploaded file
-    //console.log(req.file.filename);
-    const update = jokeController.updateJoke;
-    // eslint-disable-next-line no-unused-expressions
-    //res.send`${update}`;
-  },
-  jokeController.updateJoke
+    res.status(200).json({
+      status: 'success',
+      data: {
+        data: doc,
+      },
+    });
+  })
 );
 
 router.route('/').post(jokeController.createJoke);

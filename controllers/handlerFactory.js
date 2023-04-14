@@ -1,13 +1,7 @@
-//const fs = require('fs');
-//const util = require('util');
-//const unlinkFile = util.promisify(fs.unlink);
-//const path = require("path");
-//const multer = require('multer');
-
-//const upload = multer({ dest: 'uploads/' });
 const catchAsync = require('../utils/catchAsync');
 const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
+//const Joke = require('../models/JokeModel');
 //const { uploadFile, getFileStream } = require('../utils/s3');
 
 exports.deleteOne = Model =>
@@ -26,7 +20,7 @@ exports.deleteOne = Model =>
 
 exports.updateOne = Model =>
   catchAsync(async (req, res, next) => {
-    console.log('may')
+    console.log('may');
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
